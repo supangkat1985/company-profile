@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Website Company Profile — PT. Supangkat Eka Prasetya Makmur
 
-## Getting Started
+Website company profile modern, responsif (mobile-first), dibangun dengan
+**Next.js 14 (App Router) + TypeScript + Tailwind CSS**.
 
-First, run the development server:
+## Halaman
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+| Route      | Isi                                                                 |
+| ---------- | ------------------------------------------------------------------- |
+| `/`        | Landing / Hero, keunggulan, statistik, preview layanan, CTA         |
+| `/layanan` | 6 layanan (Web, Mobile, Cloud & DevOps, Konsultan IT, UI/UX, Security) |
+| `/tim`     | 4 anggota tim + budaya kerja DevSecOps                              |
+| `/kontak`  | Info kontak + form pesan (validasi client-side)                     |
+
+## Struktur
+
+```
+src/
+├── app/
+│   ├── layout.tsx        # Root layout + Navbar + Footer + metadata SEO
+│   ├── page.tsx          # Landing / Hero
+│   ├── globals.css
+│   ├── layanan/page.tsx
+│   ├── tim/page.tsx
+│   └── kontak/page.tsx
+├── components/
+│   ├── Navbar.tsx        # Responsif + hamburger menu mobile
+│   └── Footer.tsx
+└── data/company.ts       # Data terpusat (profil, layanan, tim, kontak)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Menjalankan
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev          # http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Build & Preview
 
-## Learn More
+Project ini memakai `output: "export"` (static export) sehingga mudah
+di-hosting di CDN/hosting statis apa pun, termasuk **Cloudflare Pages**.
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build        # menghasilkan folder out/
+npm run preview      # preview hasil static di local
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Lihat panduan lengkap di [DEPLOY-CLOUDFLARE.md](./DEPLOY-CLOUDFLARE.md).
 
-## Deploy on Vercel
+```bash
+# Opsi cepat — Direct Upload ke Cloudflare Pages
+npm run build
+npm run deploy
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Catatan
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Form kontak saat ini hanya simulasi di sisi klien (belum mengirim email).
+  Untuk pengiriman nyata, sambungkan ke Pages Function/Worker + layanan email
+  (mis. Resend) atau penyedia form pihak ketiga.
+- Tidak ada environment variable yang dibutuhkan untuk build.
+
