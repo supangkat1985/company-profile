@@ -6,6 +6,12 @@ Situs ini **100% static** (`output: "export"`), sehingga dibangun menjadi folder
 
 ## Pengaturan Build (WAJIB — sama untuk semua metode)
 
+> **PENTING:** Pilih preset **`Next.js (Static HTML Export)`** — bukan preset
+> `Next.js` (SSR). Preset SSR memaksa Cloudflare memakai adapter
+> `@cloudflare/next-on-pages`, sedangkan project ini **tidak membutuhkannya**
+> karena seluruh halaman sudah static. Jangan set build command menjadi
+> `npx @cloudflare/next-on-pages`.
+
 | Setting                | Nilai            |
 | ---------------------- | ---------------- |
 | Framework preset       | `Next.js (Static HTML Export)` |
@@ -96,6 +102,8 @@ menambahkan:
 
 | Masalah | Solusi |
 | ------- | ------ |
+| `The version of Next.js ... cannot be automatically configured. Please update the Next.js version to at least "14.2.35"` | Cloudflare (adapter `@cloudflare/next-on-pages`) mensyaratkan Next.js ≥ 14.2.35. Project ini sudah di-upgrade ke **14.2.35** (versi 14.x terbaru). Jalankan ulang: `npm install && npm run build`. |
+| Error muncul setelah memilih preset `Next.js` | Ganti preset ke **`Next.js (Static HTML Export)`** dan pastikan build command `npx next build`, output `out` |
 | Build gagal "Node version" | Set env `NODE_VERSION=20` di Settings → Environment variables |
 | Halaman `/layanan` 404 | Pastikan output directory = `out` (bukan `.next`) |
 | Error "next start not supported" | Wajar; `output: "export"` tidak memakai `next start`. Pakai `npm run preview` |
